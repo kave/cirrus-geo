@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [v0.5.0a0] - 2021-10-04
+
+Now a python package that installs a `cirrus` cli tool to manage cirrus
+projects. Existing projects are supported with some manual migration/cleanup
+steps.
+
 ## [v0.4.2] - 2021-01-12
 
 ### Added
@@ -115,6 +121,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 Initial release
 
 [Unreleased]: https://github.com/cirrus-geo/cirrus/compare/v0.4.2...main
+[v0.5.0a0]: https://github.com/cirrus-geo/cirrus-lib/compare/v0.4.2...v0.5.0a0
 [v0.4.2]: https://github.com/cirrus-geo/cirrus-lib/compare/v0.4.1...v0.4.2
 [v0.4.1]: https://github.com/cirrus-geo/cirrus-lib/compare/v0.4.0...v0.4.1
 [v0.4.0]: https://github.com/cirrus-geo/cirrus-lib/compare/v0.3.0...v0.4.0
