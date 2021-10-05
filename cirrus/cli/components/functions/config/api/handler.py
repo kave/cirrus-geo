@@ -5,7 +5,7 @@ from copy import deepcopy
 from urllib.parse import urljoin, urlparse
 
 from boto3utils import s3
-from cirruslib import StateDB, stac, STATES
+from cirrus.lib import StateDB, stac, STATES
 
 logger = logging.getLogger(__name__)
 

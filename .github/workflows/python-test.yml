@@ -7,6 +7,9 @@ on:
     branches:
       main
 
+env:
+  AWS_DEFAULT_REGION: us-west-2
+
 jobs:
   build:
     strategy:
@@ -33,6 +36,8 @@ jobs:
           # all Python files should follow PEP8
           flake8 . --count --exit-zero --max-complexity=10 --statistics
       - name: Test with pytest
+        env:
+          AWS_DEFAULT_REGION: us-west-2
         run: coverage run --source=. -m py.test
       - name: Upload coverage
         run: coverage report -m

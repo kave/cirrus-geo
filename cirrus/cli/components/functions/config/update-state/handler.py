@@ -5,8 +5,8 @@ import boto3
 
 from os import getenv
 
-from cirruslib import Catalog, StateDB
-from cirruslib.logging import get_task_logger
+from cirrus.lib import Catalog, StateDB
+from cirrus.lib.logging import get_task_logger
 
 
 logger = get_task_logger('lambda_function.update-state', catalog=tuple())
@@ -148,7 +148,7 @@ def get_execution_error(arn):
 
 
 
-# TODO: in cirruslib make a factory class that returns classes
+# TODO: in cirrus.lib make a factory class that returns classes
 # for each error type, and generalize the processing here into
 # a well-known type interface
 def parse_payload(payload):
@@ -185,7 +185,7 @@ def parse_payload(payload):
 def get_error_from_batch(logname):
     try:
         logs = LOG_CLIENT.get_log_events(logGroupName='/aws/batch/job', logStreamName=logname)
-        msg = logs['events'][-1]['message'].lstrip('cirruslib.errors.')
+        msg = logs['events'][-1]['message'].lstrip('cirrus.lib.errors.')
         parts = msg.split(':', maxsplit=1)
         if len(parts) > 1:
             error_type = parts[0]

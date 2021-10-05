@@ -11,7 +11,7 @@ from cirrus.cli.project import Project
 
 @pytest.fixture(scope='module')
 def fixture_data(pytestconfig):
-    fdir = pytestconfig.rootpath.joinpath('tests', 'fixture_data')
+    fdir = Path(__file__).parent.joinpath('fixtures')
     fdir.mkdir(exist_ok=True)
     return fdir
 

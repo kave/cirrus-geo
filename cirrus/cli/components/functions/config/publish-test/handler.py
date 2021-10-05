@@ -1,7 +1,7 @@
 import json
 import logging
 
-import cirruslib.logging
+import cirrus.lib.logging
 
 # logging
 logger = logging.getLogger(f"lambda_function.publish-test")

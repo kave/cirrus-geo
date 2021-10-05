@@ -6,8 +6,8 @@ import tempfile
 import gdal
 import rasterio
 from boto3utils import s3
-from cirruslib import Catalog, get_task_logger
-from cirruslib.transfer import download_item_assets, upload_item_assets
+from cirrus.lib import Catalog, get_task_logger
+from cirrus.lib.transfer import download_item_assets, upload_item_assets
 from rio_cogeo.cogeo import cog_translate
 from rio_cogeo.profiles import cog_profiles
 from rasterio.warp import calculate_default_transform, reproject as _reproject, Resampling
