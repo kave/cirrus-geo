@@ -112,7 +112,7 @@ class Project:
         from cirrus.cli.utils import misc
 
         # get our cirrus-lib version to inject in each lambda
-        cirrus_req = [misc.get_cirrus_lib_requirement()]
+        cirrus_req = misc.get_cirrus_lib_requirements()
 
         # make build dir or clean it up
         bd = self.build_dir

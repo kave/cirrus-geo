@@ -2,7 +2,7 @@ import uuid
 from os import getenv
 
 from boto3utils import s3
-from cirruslib import Catalog, get_task_logger
+from cirrus.lib import Catalog, get_task_logger
 
 # envvars
 CATALOG_BUCKET = getenv('CIRRUS_CATALOG_BUCKET')

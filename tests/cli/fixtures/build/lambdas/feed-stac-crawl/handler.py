@@ -12,7 +12,7 @@ import uuid
 
 from boto3utils import s3
 from copy import deepcopy
-from cirruslib.utils import submit_batch_job
+from cirrus.lib.utils import submit_batch_job
 from dateutil.parser import parse
 from pystac import Catalog
 

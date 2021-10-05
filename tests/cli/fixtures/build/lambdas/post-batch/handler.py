@@ -1,4 +1,4 @@
-from cirruslib import Catalog
+from cirrus.lib import Catalog
 
 
 def handler(payload, context):

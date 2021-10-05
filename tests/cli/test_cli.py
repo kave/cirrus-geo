@@ -60,17 +60,48 @@ def test_build(invoke, project, reference_build, build_dir):
     result = invoke('build')
     print(result.stdout)
     print(result.stderr)
-    print(result.exc_info)
     assert result.exit_code == 0
     assert build_dir.is_dir()
 
     if reference_build:
-        dcmp = filecmp.dircmp(reference_build, build_dir)
-        print(f'Files in missing from build: {dcmp.left_only}')
-        print(f'Files added in build: {dcmp.right_only}')
-        print(f'Files different in build: {dcmp.diff_files}')
-        print(f'Files unable to be compared: {dcmp.funny_files}')
-        for fname in dcmp.diff_files:
+        missing = []
+        added = []
+        changed = []
+        failed = []
+
+        def compare(dir1, dir2):
+            nonlocal missing
+            nonlocal added
+            nonlocal changed
+            nonlocal failed
+
+            dcmp = filecmp.dircmp(dir1, dir2)
+            missing += [dir1.joinpath(name) for name in dcmp.left_only]
+            added += [dir2.joinpath(name) for name in dcmp.right_only]
+            changed += [dir1.joinpath(name) for name in dcmp.diff_files]
+            failed += [dir1.joinpath(name) for name in dcmp.funny_files]
+
+            for subdir in dcmp.common_dirs:
+                compare(dir1.joinpath(subdir), dir2.joinpath(subdir))
+
+        compare(reference_build, build_dir)
+
+        missing = [path.relative_to(reference_build) for path in missing]
+        added = [path.relative_to(build_dir) for path in added]
+        changed = [path.relative_to(reference_build) for path in changed]
+        failed = [path.relative_to(reference_build) for path in failed]
+
+        def print_list(msg, _list):
+            print(msg)
+            for item in _list:
+                print(item)
+
+        print_list('Files in missing from build:', missing)
+        print_list('Files added in build: ', added)
+        print_list('Files unable to be compared: ', failed)
+        print_list('Files different in build: ', changed)
+        print('Diff:')
+        for fname in changed:
             with reference_build.joinpath(fname).open() as f1:
                 with build_dir.joinpath(fname).open() as f2:
                     sys.stdout.writelines(difflib.unified_diff(
@@ -80,7 +111,7 @@ def test_build(invoke, project, reference_build, build_dir):
                         tofile=f'generated {fname}',
                     ))
 
-        assert not (dcmp.left_only or dcmp.right_only or dcmp.diff_files or dcmp.funny_files)
+        assert not (missing, added, changed, failed)
 
 
 @pytest.mark.parametrize(

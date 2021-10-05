@@ -6,9 +6,9 @@ import sys
 import uuid
 
 from boto3utils import s3
-from cirruslib.statedb import StateDB
-from cirruslib.utils import submit_batch_job
-from cirruslib import Catalogs
+from cirrus.lib.statedb import StateDB
+from cirrus.lib.utils import submit_batch_job
+from cirrus.lib import Catalogs
 from json import dumps
 from os import getenv
 from traceback import format_exc
